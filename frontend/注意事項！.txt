@@ -1,0 +1,7 @@
+修改vue檔的名稱後
+
+1.去檔案的所在目錄裡的XXXrouter.js
+2.找到被你修改的vue檔對應的import選項
+4.修改export default中的項目
+5.去Navbar中找到對應的XXXRouter物件
+6.修改物件內的label及name

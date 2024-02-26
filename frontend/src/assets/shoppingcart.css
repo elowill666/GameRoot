@@ -1,0 +1,31 @@
+img {
+    width: 150px;
+}
+
+.custom-table {
+    width: 45%;
+    margin: auto;
+    /* 設定表格寬度為 100% */
+}
+
+
+.custom-table td {
+    /* 設定需要的列寬度，例如 100px */
+    width: 5%;
+}
+
+.custom-table td:first-child {
+    width: 1%;
+    padding-left: 2%;
+    /* 設定第一個 td 元素的寬度為 150px */
+}
+
+.custom-table td:nth-child(5) {
+    width: 1.5%;
+}
+.custom-table td:nth-child(4) {
+    width: 1%;
+}
+.custom-table td:nth-child(3) {
+    width: 3%;
+}
