@@ -12,11 +12,18 @@ pipeline {
                 git branch: 'main', credentialsId: 'jenkins-doc-git', url: 'https://github.com/elowill666/GameRoot.git'
             }
         }
-
+        stage('Build') {
+            steps {
+                script {
+                    // 設定 Docker 的 PATH 路徑
+                    sh 'export PATH=$PATH:/usr/local/bin && docker --version && docker compose version'
+                }
+            }
+        }
         stage('Up Docker Containers') {
             steps {
                 script {
-                    sh 'docker compose -f ${COMPOSE_FILE} up -d'
+                    sh 'docker compose -f ${COMPOSE_FILE} up -d --build'
                 }
             }
         }
