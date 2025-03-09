@@ -12,18 +12,7 @@ pipeline {
                 git branch: 'main', credentialsId: 'jenkins-doc-git', url: 'https://github.com/elowill666/GameRoot.git'
             }
         }
-
-        stage('Build Docker Images') {
-            steps {
-                script {
-                    sh 'curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose'
-                    sh 'chmod +x /usr/local/bin/docker-compose'
-
-                    sh 'docker-compose -f ${COMPOSE_FILE} build'
-                }
-            }
-        }
-
+        
         stage('Up Docker Containers') {
             steps {
                 script {
