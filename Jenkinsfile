@@ -12,11 +12,11 @@ pipeline {
                 git branch: 'main', credentialsId: 'jenkins-doc-git', url: 'https://github.com/elowill666/GameRoot.git'
             }
         }
-        
+
         stage('Up Docker Containers') {
             steps {
                 script {
-                    sh 'docker-compose -f ${COMPOSE_FILE} up -d'
+                    sh 'docker compose -f ${COMPOSE_FILE} up -d'
                 }
             }
         }
@@ -24,7 +24,7 @@ pipeline {
         stage('Tear Down Docker Containers') {
             steps {
                 script {
-                    sh 'docker-compose -f ${COMPOSE_FILE} down'
+                    sh 'docker compose -f ${COMPOSE_FILE} down'
                 }
             }
         }
