@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+
+  backend:
+    build: ./backend
+    container_name: springbootapp
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:sqlserver://sqlserver:1433;databaseName=finalproj;encrypt=false;trustServerCertificate=true;collation=Latin1_General_CI_AS
+
+      SPRING_DATASOURCE_USERNAME: sa
+      SPRING_DATASOURCE_PASSWORD: Passw0rd
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: vueapp
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    external: true
