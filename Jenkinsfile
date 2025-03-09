@@ -23,7 +23,7 @@ pipeline {
         stage('Up Docker Containers') {
             steps {
                 script {
-                    sh 'docker compose -f ${COMPOSE_FILE} up -d --build'
+                    sh 'export PATH=$PATH:/usr/local/bin && docker compose -f ${COMPOSE_FILE} up -d --build'
                 }
             }
         }
@@ -31,7 +31,7 @@ pipeline {
         stage('Tear Down Docker Containers') {
             steps {
                 script {
-                    sh 'docker compose -f ${COMPOSE_FILE} down'
+                    sh 'export PATH=$PATH:/usr/local/bin && docker compose -f ${COMPOSE_FILE} down'
                 }
             }
         }
@@ -39,7 +39,7 @@ pipeline {
 
     post {
         always {
-            sh 'docker-compose -f ${COMPOSE_FILE} down'
+            sh 'export PATH=$PATH:/usr/local/bin && docker compose -f ${COMPOSE_FILE} down'
         }
     }
 }
