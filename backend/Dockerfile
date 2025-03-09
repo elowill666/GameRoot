@@ -7,7 +7,7 @@ WORKDIR /app
 COPY target/finalproject-0.0.1-SNAPSHOT.jar app.jar
 
 
-EXPOSE 8080
+EXPOSE 8081
 
 # 定義ENTRYPOINT指令以運行Spring Boot應用程式
 # ENTRYPOINT ["java", "-jar", "app.jar"]
