@@ -65,13 +65,12 @@ public class ChatController {
     @GetMapping("/messages/{senderId}/{recipientId}")
     public ResponseEntity<List<ChatMessages>> findChatMessages(
             @PathVariable String senderId,
-            @PathVariable String recipientId,
-            @RequestParam(defaultValue = "50") int limit) {
+            @PathVariable String recipientId) {
 
         try {
             // 獲取最新的訊息
             List<ChatMessages> messages = chatMessageService.findRecentMessages(
-                    senderId, recipientId, limit);
+                    senderId, recipientId);
 
             return ResponseEntity.ok(messages);
 

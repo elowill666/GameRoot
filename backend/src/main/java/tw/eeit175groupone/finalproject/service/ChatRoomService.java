@@ -80,13 +80,4 @@ public class ChatRoomService {
         return chatId;
     }
 
-    /**
-     * 獲取用戶的所有聊天室
-     * 
-     * @param userId 用戶ID
-     * @return 聊天室列表
-     */
-    public List<ChatRoom> getUserChatRooms(String userId) {
-        return chatRoomRepository.findBySenderId(userId);
-    }
 }

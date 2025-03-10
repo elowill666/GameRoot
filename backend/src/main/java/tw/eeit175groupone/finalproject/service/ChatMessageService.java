@@ -38,7 +38,7 @@ public class ChatMessageService {
     // 新增：獲取特定數量的最新訊息
     public List<ChatMessages> findRecentMessages(String senderId, String recipientId, int limit) {
         return chatRoomService.getChatRoomId(senderId, recipientId, false)
-                .map(chatId -> repository.findTopByChatIdOrderByTimestampDesc(chatId, limit))
+                .map(chatId -> repository.findTopByChatIdOrderByTimestampDesc(chatId))
                 .orElse(new ArrayList<>());
     }
 

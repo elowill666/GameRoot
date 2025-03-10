@@ -10,6 +10,6 @@ public interface ChatMessageRepository extends JpaRepository<ChatMessages, Integ
     List<ChatMessages> findByChatId(String chatId);
 
     // 獲取最新的N條消息
-    List<ChatMessages> findTopByChatIdOrderByTimestampDesc(String chatId, int limit);
+    List<ChatMessages> findTopByChatIdOrderByTimestampDesc(String chatId);
 
 }

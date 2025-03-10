@@ -10,5 +10,4 @@ import tw.eeit175groupone.finalproject.domain.ChatRoom;
 public interface ChatRoomRepository extends JpaRepository<ChatRoom, Integer> {
     Optional<ChatRoom> findBySenderIdAndRecipientId(String senderId, String recipientId);
 
-    List<ChatRoom> findBySenderId(String senderId);
 }
