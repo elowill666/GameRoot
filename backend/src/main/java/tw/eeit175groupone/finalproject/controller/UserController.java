@@ -300,6 +300,11 @@ public class UserController {
     }
 
     // onetooneChat
+    @GetMapping("/users")
+    public ResponseEntity<List<UserBean>> findConnectedUsers() {
+        return ResponseEntity.ok(userService.findConnectedUsers());
+    }
+
     // 增加私訊列表功能
     @GetMapping("/addfirend/{user2}")
     public ResponseEntity<?> addChatFriend(@PathVariable Integer user2, HttpSession session) {
@@ -319,7 +324,6 @@ public class UserController {
         return ResponseEntity.ok("訪問失敗");
     }
 
-    // 取得所有聊過天的好友
     @GetMapping("/getAllFriend/{userId}")
     public ResponseEntity<?> getAllFriend(@PathVariable Integer userId) {
         List<Friend> friend = userService.getAllFriend(userId);
