@@ -52,9 +52,6 @@ public class ChatController {
                             savedMsg.getRecipientId(),
                             savedMsg.getContent()));
 
-            // 標記訊息為已發送
-            chatMessageService.markAsRead(savedMsg.getSenderId(), savedMsg.getRecipientId());
-
         } catch (ChatRoomNotFoundException e) {
             log.error("處理訊息時發生錯誤: {}", e.getMessage());
             // 可以考慮通知發送者訊息傳送失敗
@@ -75,9 +72,6 @@ public class ChatController {
             // 獲取最新的訊息
             List<ChatMessages> messages = chatMessageService.findRecentMessages(
                     senderId, recipientId, limit);
-
-            // 標記訊息為已讀
-            chatMessageService.markAsRead(senderId, recipientId);
 
             return ResponseEntity.ok(messages);
 

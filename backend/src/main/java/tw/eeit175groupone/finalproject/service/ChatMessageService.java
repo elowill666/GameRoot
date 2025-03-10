@@ -2,7 +2,6 @@ package tw.eeit175groupone.finalproject.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import tw.eeit175groupone.finalproject.dao.ChatMessageRepository;
 import tw.eeit175groupone.finalproject.domain.ChatMessages;
-import tw.eeit175groupone.finalproject.dto.ChatMessage;
 import tw.eeit175groupone.finalproject.exception.ChatRoomNotFoundException;
 
 @Service
@@ -44,10 +42,4 @@ public class ChatMessageService {
                 .orElse(new ArrayList<>());
     }
 
-    // 新增：標記訊息為已讀
-    @Transactional
-    public void markAsRead(String senderId, String recipientId) {
-        chatRoomService.getChatRoomId(senderId, recipientId, false)
-                .ifPresent(chatId -> repository.updateStatusBySenderIdAndRecipientId(recipientId, senderId, "READ"));
-    }
 }
