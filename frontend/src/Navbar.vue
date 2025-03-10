@@ -40,7 +40,7 @@
                   </template>
                 </el-menu-item>
               </template>
-              <div style="text-align: center">前往首頁</div>
+              <div class="popover-text">前往首頁</div>
             </el-popover>
 
             <el-popover placement="top-start" effect="dark" trigger="hover" :hide-after="0">
@@ -51,7 +51,7 @@
                   </el-icon>
                 </el-menu-item>
               </template>
-              <div style="text-align: center">前往遊戲商店</div>
+              <div class="popover-text">前往遊戲商店</div>
             </el-popover>
 
             <el-popover placement="top-start" effect="dark" trigger="hover" :hide-after="0">
@@ -62,7 +62,7 @@
                   </el-icon>
                 </el-menu-item>
               </template>
-              <div style="text-align: center">前往論壇</div>
+              <div class="popover-text">前往論壇</div>
             </el-popover>
 
             <el-popover placement="top-start" effect="dark" trigger="hover" :hide-after="0">
@@ -73,13 +73,14 @@
                   </el-icon>
                 </el-menu-item>
               </template>
-              <div style="text-align: center">前往購物車</div>
+              <div class="popover-text">前往購物車</div>
             </el-popover>
 
-            <el-menu-item :index="dashboardRoute" @click="currentRouterPath(dashboardRoute)"
-              v-if="loginStore.isAdmin"><el-icon size="40px">
+            <el-menu-item :index="dashboardRoute" @click="currentRouterPath(dashboardRoute)" v-if="loginStore.isAdmin">
+              <el-icon size="40px">
                 <DataLine />
-              </el-icon></el-menu-item>
+              </el-icon>
+            </el-menu-item>
 
             <el-menu-item index="/user/userlogin" v-if="!loginStore.isLogin && !loginStore.isAdmin"
               @click="currentRouterPath()">
@@ -87,13 +88,14 @@
             </el-menu-item>
 
             <el-dropdown v-if="loginStore.isLogin || loginStore.isAdmin" popper-class="dropDownStyle">
-              <div style="display: flex; align-items: center; cursor: default">
+              <div class="user-info">
                 <el-avatar :src="userDetail.userphoto || userdefaultphoto" :size="60" shape="circle"
-                  style="margin: 0 20px 0 20px" />
-                <span style="font-size: 20px; margin-right: 15px; color: #baccde">{{ userDetail.username }}
-                  <router-link class="router-link" to="/order/rootnode"><button class="rootnodebutton">
-                      根節點:{{ userDetail.cash }}
-                    </button></router-link></span>
+                  class="user-avatar" />
+                <span class="user-name">{{ userDetail.username }}
+                  <router-link class="router-link" to="/order/rootnode">
+                    <button class="rootnodebutton">根節點:{{ userDetail.cash }}</button>
+                  </router-link>
+                </span>
               </div>
 
               <template #dropdown>
@@ -102,40 +104,40 @@
                     <el-icon>
                       <UserFilled />
                     </el-icon>
-                    <span style="color: black !important"> 會員檔案</span>
+                    <span class="dropdown-text">會員檔案</span>
                   </el-dropdown-item>
                   <el-dropdown-item @click="goorder">
                     <el-icon>
                       <Tickets />
                     </el-icon>
-                    <span style="color: black !important"> 訂單明細</span>
+                    <span class="dropdown-text">訂單明細</span>
                   </el-dropdown-item>
                   <el-dropdown-item @click="goproductwishlist">
                     <el-icon>
                       <Star />
                     </el-icon>
-                    <span style="color: black !important"> 願望清單</span>
+                    <span class="dropdown-text">願望清單</span>
                   </el-dropdown-item>
                   <el-dropdown-item @click="goproductcoupon">
                     <el-icon>
                       <Ticket />
                     </el-icon>
-                    <span style="color: black !important"> 優惠券</span>
+                    <span class="dropdown-text">優惠券</span>
                   </el-dropdown-item>
                   <el-dropdown-item @click="gousercollections">
                     <el-icon>
                       <Collection />
                     </el-icon>
-                    <span style="color: black !important"> 文章收藏</span>
+                    <span class="dropdown-text">文章收藏</span>
                   </el-dropdown-item>
                   <el-dropdown-item @click="gochangepassword" v-if="!isgoogleLogin">
                     <el-icon>
                       <Lock />
                     </el-icon>
-                    <span style="color: black !important"> 修改密碼</span>
+                    <span class="dropdown-text">修改密碼</span>
                   </el-dropdown-item>
                   <el-dropdown-item v-if="loginStore.isLogin || loginStore.isAdmin" @click="Logout">
-                    <span style="color: black !important">登出</span>
+                    <span class="dropdown-text">登出</span>
                   </el-dropdown-item>
                 </el-dropdown-menu>
               </template>
@@ -145,14 +147,12 @@
       </el-header>
       <el-scrollbar height="100vh">
         <el-container style="background-color: #141f2a">
-          <!-- <DashboardRouterlink v-if="isDashboard"></DashboardRouterlink> -->
           <el-main class="bodymain">
             <router-view v-slot="{ Component }">
               <transition>
                 <component :is="Component" />
               </transition>
             </router-view>
-            <!-- 貌似會因為ChatRoom會將所有的頁面尾端多了塊空白區塊 -->
             <ChatRoom v-if="loginStore.isLogin && !loginStore.isAdmin"></ChatRoom>
             <ChatOneToOne v-if="loginStore.showOneToOne && loginStore.isLogin" @show-chat="handleShowChat">
             </ChatOneToOne>
@@ -165,43 +165,30 @@
                 <div class="col-xs-12 col-sm-6 col-md-3">
                   <div class="widget subscribe no-box">
                     <h5 class="widget-title">關於我們<span></span></h5>
-                    <p>
-                      About the company, little discription will goes here..
-                    </p>
+                    <p>About the company, little description will go here..</p>
                   </div>
                 </div>
-
                 <div class="col-xs-12 col-sm-6 col-md-3">
                   <div class="widget no-box">
                     <h5 class="widget-title">快速導航<span></span></h5>
                     <ul class="thumbnail-widget">
                       <li>
-                        <div class="thumb-content">
-                          <a href="#.">Get Started</a>
-                        </div>
+                        <div class="thumb-content"><a href="#.">Get Started</a></div>
                       </li>
                       <li>
-                        <div class="thumb-content">
-                          <a href="#.">Top Leaders</a>
-                        </div>
+                        <div class="thumb-content"><a href="#.">Top Leaders</a></div>
                       </li>
                       <li>
-                        <div class="thumb-content">
-                          <a href="#.">Success Stories</a>
-                        </div>
+                        <div class="thumb-content"><a href="#.">Success Stories</a></div>
                       </li>
                       <li>
-                        <div class="thumb-content">
-                          <a href="#.">Event/Tickets</a>
-                        </div>
+                        <div class="thumb-content"><a href="#.">Event/Tickets</a></div>
                       </li>
                       <li>
                         <div class="thumb-content"><a href="#.">News</a></div>
                       </li>
                       <li>
-                        <div class="thumb-content">
-                          <a href="#.">Lifestyle</a>
-                        </div>
+                        <div class="thumb-content"><a href="#.">Lifestyle</a></div>
                       </li>
                       <li>
                         <div class="thumb-content"><a href="#.">About</a></div>
@@ -209,28 +196,21 @@
                     </ul>
                   </div>
                 </div>
-
                 <div class="col-xs-12 col-sm-6 col-md-3">
                   <div class="widget no-box">
                     <h5 class="widget-title">Join us<span></span></h5>
                     <a class="btn" href="http://localhost:5173/home" target="_blank">加入我們</a>
                   </div>
                 </div>
-
                 <div class="col-xs-12 col-sm-6 col-md-3">
                   <div class="widget no-box">
                     <h5 class="widget-title">聯絡我們<span></span></h5>
-
-                    <p>
-                      <a href="mailto:eeit175together@gmail.com" title="glorythemes">eeit175together@gmail.com</a>
-                    </p>
-                    <!-- icon區 -->
+                    <p><a href="mailto:eeit175together@gmail.com" title="glorythemes">eeit175together@gmail.com</a></p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
           <div class="footer-copyright">
             <div class="container">
               <div class="row">
@@ -245,6 +225,7 @@
     </el-container>
   </div>
 </template>
+
 <script setup>
 import { ref, onBeforeMount, onMounted } from "vue";
 import axios from "axios";
@@ -252,10 +233,10 @@ import { useLoginStore } from "../src/store/navbar";
 import Swal from "sweetalert2";
 import { useRouter, useRoute } from "vue-router";
 import ChatRoom from "./views/ChatRoom.vue";
-import DashboardRouterlink from "./views/dashboard/DashboardRouterlink.vue";
 import ChatOneToOne from "./views/user/ChatOneToOne.vue";
 import userdefaultphoto from "./assets/defaultUser.png";
 import { storeToRefs } from "pinia";
+
 const router = useRouter();
 const route = useRoute();
 const url = import.meta.env.VITE_JAVA_URL;
@@ -269,45 +250,36 @@ const userRoute = ref("/user/usersignup");
 const dashboardRoute = ref("/dashboard/datamanagement");
 const isDashboard = ref(false);
 const defaultact = ref("");
-// let isgoogleLogin = ref(false);
 const vuebaseUrl = window.location.origin;
-//default
+
+const menuStyles = {
+  '--el-menu-bg-color': '#141f2a',
+  '--el-menu-text-color': '#c9c9c9',
+  '--el-menu-hover-text-color': '#ffd306',
+  '--el-menu-active-color': '#c9c9c9',
+  '--el-menu-hover-bg-color': 'none',
+  height: '90px'
+};
+
 let handleShowChat = (value) => {
   loginStore.showOneToOne = value;
 };
-//登出
+
 const Logout = async () => {
   try {
-    const { data } = await axios.get(`${url}/user/logout`, {
-      withCredentials: true,
-    });
-    if (data == true) {
+    const { data } = await axios.get(`${url}/user/logout`, { withCredentials: true });
+    if (data) {
       currentRouterPath();
       Swal.fire({
-        // text: '已登出',
         html: '<h4 style="display: flex; justify-content: center; align-items: center; height: 100%; font-family= "Arial", sans-serif;">已登出</h4>',
         icon: "success",
         showConfirmButton: false,
         width: 300,
         timer: 1200,
         toast: true,
-
-        showClass: {
-          popup: `
-        animate__animated
-        animate__fadeInUp
-        animate__faster
-        `,
-        },
-        hideClass: {
-          popup: `
-        animate__animated
-        animate__fadeOutDown
-        animate__faster
-        `,
-        },
+        showClass: { popup: 'animate__animated animate__fadeInUp animate__faster' },
+        hideClass: { popup: 'animate__animated animate__fadeOutDown animate__faster' }
       }).then(() => {
-        // router.push('/home')
         loginStore.isLogin = false;
         loginStore.isAdmin = false;
         loginStore.showOneToOne = false;
@@ -319,16 +291,13 @@ const Logout = async () => {
     console.error("Logout failed", error);
   }
 };
+
 async function authenticate() {
   try {
-    const { data } = await axios.get(`${url}/user/authenticate`, {
-      withCredentials: true,
-    });
-    if (data === true) {
+    const { data } = await axios.get(`${url}/user/authenticate`, { withCredentials: true });
+    if (data === true || data === "管理員") {
       const userId = localStorage.getItem("userId");
-      const res = await axios.get(`${url}/user/getuser/${userId}`, {
-        withCredentials: true,
-      });
+      const res = await axios.get(`${url}/user/getuser/${userId}`, { withCredentials: true });
       userDetail.value = res.data;
       loginStore.isLogin = true;
     }
@@ -368,25 +337,20 @@ function goprofile() {
   currentRouterPath();
   router.push("/user/userprofile");
 }
+
 function gochangepassword() {
   currentRouterPath();
   router.push("/user/userEmailCheck");
 }
+
 function currentRouterPath(routerPathData) {
-  console.log(routerPathData);
-  if (dashboardRoute.value == routerPathData) {
-    isDashboard.value = true;
-  } else {
-    isDashboard.value = false;
-  }
+  isDashboard.value = dashboardRoute.value === routerPathData;
 }
 
 function currentWindowPath() {
-  console.log(windowPath);
-  if ("/" == windowPath) {
+  if (windowPath === "/") {
     router.push("/home");
   } else if (windowPath.startsWith("/home")) {
-    console.log(windowPath);
     defaultact.value = "/home";
     isDashboard.value = false;
   } else if (windowPath.startsWith("/product")) {
@@ -409,37 +373,25 @@ function currentWindowPath() {
 
 function gousercollections() {
   currentRouterPath();
-  router.push({
-    name: "UserCollections",
-    params: {
-      page: 1,
-    },
-  });
+  router.push({ name: "UserCollections", params: { page: 1 } });
 }
 
 function goproductwishlist() {
-  router.push({
-    name: "ProductWishlist",
-  });
+  router.push({ name: "ProductWishlist" });
 }
 
 function goproductcoupon() {
-  router.push({
-    name: "userfour",
-  });
+  router.push({ name: "userfour" });
 }
+
 function goorder() {
-  router.push({
-    name: "orderDetails",
-    params: {
-      id: userDetail.value.id,
-    },
-  });
-};
+  router.push({ name: "orderDetails", params: { id: userDetail.value.id } });
+}
 </script>
+
 <style scoped>
 .common-layout {
-  background: url("../public/images/homeimg.jpg") center/cover fixed;
+  background: url("/images/homeimg.jpg") center/cover fixed;
   margin: 0;
   overflow: hidden;
   background-color: rgba(0, 0, 0, 0.2);
@@ -449,7 +401,6 @@ function goorder() {
 .router-link {
   text-decoration: none;
   color: inherit;
-  /* 保持颜色和默认样式一致 */
 }
 
 .rootnodebutton {
@@ -474,7 +425,6 @@ function goorder() {
 }
 
 .bodymain {
-  /* background-color: #203243; */
   background-image: linear-gradient(to top right, #152534, #24313c);
   font-family: "Arial", sans-serif;
   color: rgb(211, 211, 211);
@@ -498,11 +448,6 @@ li.el-menu-item {
   font-size: 15px;
 }
 
-/*==================== 
-	Footer 
-====================== */
-
-/* Main Footer */
 footer .main-footer {
   padding: 20px 0;
   height: 270px;
@@ -514,7 +459,6 @@ footer ul {
   list-style: none;
 }
 
-/* Copy Right Footer */
 .footer-copyright {
   background: #222;
   padding: 5px 0;
@@ -565,14 +509,6 @@ footer.light .footer-copyright {
   background: none repeat scroll 0 0 rgba(255, 255, 255, 0.3);
 }
 
-/* Footer 4 */
-.footer- .logo {
-  display: inline-block;
-}
-
-/*==================== 
-	Widgets 
-====================== */
 .widget {
   padding: 20px;
   margin-bottom: 40px;
@@ -587,10 +523,6 @@ footer.light .footer-copyright {
   background-color: transparent;
   margin-bottom: 40px;
   box-shadow: none;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  -ms-box-shadow: none;
-  -o-box-shadow: none;
 }
 
 .widget.subscribe p {
@@ -693,5 +625,50 @@ footer.light .footer-copyright {
   width: 150px;
   display: flex;
   justify-content: center;
+}
+
+.logo {
+  width: 100px;
+  padding-top: 10px;
+}
+
+.title-text {
+  font-family: OCR A Std, monospace;
+  padding-top: 40px;
+  font-size: 20px;
+  text-shadow: 0 0 5px #ffd306;
+}
+
+.menu-right {
+  flex: 1;
+  width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: 25px;
+}
+
+.popover-text {
+  text-align: center;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  cursor: default;
+}
+
+.user-avatar {
+  margin: 0 20px 0 20px;
+}
+
+.user-name {
+  font-size: 20px;
+  margin-right: 15px;
+  color: #baccde;
+}
+
+.dropdown-text {
+  color: black !important;
 }
 </style>

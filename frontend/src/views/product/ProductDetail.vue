@@ -11,13 +11,14 @@
           <el-container style="text-align: center">
             <el-aside width="700px" style="padding-top: 20px">
               <!-- 產品照片 -->
-              <ProductImage :productImg="product?.productImages" :productId="product?.product?.productId"></ProductImage>
+              <ProductImage :productImg="product?.productImages" :productId="product?.product?.productId">
+              </ProductImage>
               <!-- 商家測評及留言評論 -->
               <div>
                 <div v-if="product &&
                   product.gameInfor &&
                   product.gameInfor.length !== 0
-                  ">
+                ">
                   商家評論：{{
                     product && product.gameInfor && product.gameInfor[0]?.rating
                   }}
@@ -54,7 +55,7 @@
                     new Date(product?.product?.discountEndtime) >
                     new Date() &&
                     product.discountFactor !== null
-                    ">
+                  ">
                     <el-text tag="del" style="padding: 10px; font-size: 1em">原價：${{ product?.product?.price }}</el-text>
                     <el-text tag="ins" style="font-size: 1.5em; color: #ff2d2d">
                       特價：${{
@@ -128,7 +129,7 @@
             </el-tab-pane>
             <!-- 確保在 product 完全準備好之前，不要嘗試訪問它的屬性 -->
             <el-tab-pane label="遊戲規格" v-if="product && product.gameInfor && product.gameInfor.length !== 0
-              ">
+            ">
               <GameDemands :gameInfor="product?.gameInfor"></GameDemands>
             </el-tab-pane>
           </el-tabs>
@@ -225,7 +226,7 @@ onMounted(async () => {
 
 <style scoped>
 .back {
-  background: url("../../../public/images/homeimg.jpg") center/cover fixed;
+  background: url("../../../public/images/forumimg.jpg") center/cover fixed;
   margin: 0;
   overflow: hidden;
   background-color: rgba(0, 0, 0, 0.2);
@@ -256,23 +257,18 @@ li {
   height: auto;
   border: 0px grey solid;
   background-color: white
-
 }
 
 .outlined {
   width: 600px;
   margin: auto;
 }
-
-
-
-
 </style>
 <style lang="scss">
-
-.el-tabs--border-card >.el-tabs__header .el-tabs__item.is-active{
+.el-tabs--border-card>.el-tabs__header .el-tabs__item.is-active {
   color: #ffdc42 !important;
 }
+
 .el-tabs__item:hover {
   color: #ffdc42 !important;
 }

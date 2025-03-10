@@ -1,9 +1,5 @@
 package tw.eeit175groupone.finalproject.service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -14,14 +10,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import jakarta.persistence.criteria.CriteriaBuilder.In;
 import jakarta.transaction.Transactional;
-import tw.eeit175groupone.finalproject.dao.ArticlesRepository;
 import tw.eeit175groupone.finalproject.dao.CollectionsRepository;
 import tw.eeit175groupone.finalproject.dao.CommentsRepository;
 import tw.eeit175groupone.finalproject.dao.LikesRepository;
 import tw.eeit175groupone.finalproject.domain.CollectionsBean;
-import tw.eeit175groupone.finalproject.domain.WishlistBean;
 import tw.eeit175groupone.finalproject.dto.CollectionsLikesCommentsDTO;
 
 @Service
@@ -30,13 +23,11 @@ public class CollectionsService {
 
     @Autowired
     private CollectionsRepository collectionsRepository;
-    @Autowired
-    private ArticlesRepository articlesRepository;
+
     @Autowired
     private LikesRepository likesRepository;
     @Autowired
     private CommentsRepository commentsRepository;
-    private CollectionsLikesCommentsDTO next;
 
     // 收藏文章清單++
     public boolean insertCollection(String body) {
@@ -110,8 +101,7 @@ public class CollectionsService {
 
             List<CollectionsLikesCommentsDTO> productByUserIdInCollections = collectionsRepository
                     .findProductByUserIdInCollections(userId, pageable);
-            
-            List<Integer> articlesIds = new ArrayList<>();
+
             List<Object[]> articlesLike = likesRepository.countLikesNumberEachArticle();
             List<Object[]> articlesComment = commentsRepository.countCommentsNumberEachArticle();
 
@@ -123,15 +113,16 @@ public class CollectionsService {
                         temp.setLikes(countArti);
                     }
                 }
-                for (Object[] temp3 : articlesComment){
-                    Integer artiId = (Integer)temp3[0];
-                    if(artiId.equals(temp.getArticlesId())){
+                for (Object[] temp3 : articlesComment) {
+                    Integer artiId = (Integer) temp3[0];
+                    if (artiId.equals(temp.getArticlesId())) {
                         Long countArti = (Long) temp3[1];
                         temp.setComments(countArti);
                     }
                 }
             }
-            // Iterator<CollectionsLikesCommentsDTO> iterator = productByUserIdInCollections.iterator();
+            // Iterator<CollectionsLikesCommentsDTO> iterator =
+            // productByUserIdInCollections.iterator();
             // while (iterator.hasNext()) {
             // CollectionsLikesCommentsDTO next = iterator.next();
             // articlesIds.add(next.getArticlesId());
@@ -160,7 +151,7 @@ public class CollectionsService {
             Integer start = Integer.parseInt(request.getOrDefault("start", null));
             Integer rows = Integer.parseInt(request.getOrDefault("rows", null));
             String sort = request.getOrDefault("sort", null);
-            if (sort == null && sort.length() == 0) {
+            if (sort == null || sort.length() == 0) { // 修改這行
                 return null;
             }
             // 取的排序方式

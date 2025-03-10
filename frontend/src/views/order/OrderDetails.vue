@@ -5,15 +5,8 @@
     <!-- 時間查詢 -->
     <div style="width: 900px; margin: auto; margin-bottom: 20px">
       <div style="justify-content: flex-start">
-        <el-date-picker
-          v-model="value2"
-          type="monthrange"
-          unlink-panels
-          range-separator="To"
-          start-placeholder="Start month"
-          end-placeholder="End month"
-          @change="dosearch(value2)"
-        />
+        <el-date-picker v-model="value2" type="monthrange" unlink-panels range-separator="To"
+          start-placeholder="Start month" end-placeholder="End month" @change="dosearch(value2)" />
       </div>
 
       <!-- <h3>查詢結果</h3> -->
@@ -45,15 +38,13 @@
                 {{ formatDate(order.ordersBean.orderDate) }}
               </td>
               <td style="width: 65px">
-                <RouterLink
-                  :to="{
-                    name: 'orderDetailsCard',
-                    params: {
-                      id: order.ordersBean.orderId,
-                      userid: order.ordersBean.userId,
-                    },
-                  }"
-                >
+                <RouterLink :to="{
+                  name: 'orderDetailsCard',
+                  params: {
+                    id: order.ordersBean.orderId,
+                    userid: order.ordersBean.userId,
+                  },
+                }">
                   <button type="button" class="btn btn-primary">
                     查看更多
                   </button>
@@ -65,16 +56,9 @@
       </div>
       <!-- Pagination Controls -->
 
-      <el-pagination
-        style="justify-content: end"
-        layout="prev, pager, next"
-        :total="totalItems"
-        v-if="totalItems > 0"
-        :current-page.sync="currentPage"
-        :page-size="pageSize"
-        :background="background"
-        @current-change="handleCurrentChange"
-      />
+      <el-pagination style="justify-content: end" layout="prev, pager, next" :total="totalItems" v-if="totalItems > 0"
+        :current-page.sync="currentPage" :page-size="pageSize" :background="background"
+        @current-change="handleCurrentChange" />
     </div>
   </div>
 </template>
@@ -91,9 +75,8 @@ const ordersTemp = ref([]);
 onMounted(async () => {
   const route = useRoute();
   const userId = route.params.id;
-  const VITE_API_GAMESHOP_USERORDER = `${
-    import.meta.env.VITE_JAVA_URL
-  }/order/userordertest/`;
+  const VITE_API_GAMESHOP_USERORDER = `${import.meta.env.VITE_JAVA_URL
+    }/order/userordertest/`;
   const response = await axios.post(VITE_API_GAMESHOP_USERORDER + userId);
   orders.value = response.data;
   ordersTemp.value = response.data;
@@ -143,7 +126,7 @@ const handleCurrentChange = (val) => {
 
 <style scoped>
 .myback {
-  background: url("../../../public/images/homeimg.jpg") center/cover fixed;
+  background: url("../../../public/images/forumimg.jpg") center/cover fixed;
   margin: 0;
   overflow: hidden;
   background-color: rgba(0, 0, 0, 0.2);

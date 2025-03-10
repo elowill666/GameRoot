@@ -1,25 +1,25 @@
 <template>
     <div class="layout">
-    <main>
-        <div class="row row-cols-1 row-cols-md-3 g-4 all">
-            <div class="col" v-for="item in rootNode" :key="item.productId">
-                <div class="card">
-                    <img :src=item.coverImage alt="a snow-capped mountain range" />
-                    <div class="card-body">
-                        <h2 class="card-title">{{ item.productName }}</h2>
-                        <span v-if="item.productStatus === 'discount'" class="org-price">
-                            原價{{ item.price }}</span>
-                        <span v-if="item.productStatus === 'discount'" class="discount-price">
-                            驚爆大增量{{ item.discount }}</span>
-                        <button class="btn btn-secondary bbun" @click="gopay(item)">儲值去</button>
+        <main>
+            <div class="row row-cols-1 row-cols-md-3 g-4 all">
+                <div class="col" v-for="item in rootNode" :key="item.productId">
+                    <div class="card">
+                        <img :src=item.coverImage alt="a snow-capped mountain range" />
+                        <div class="card-body">
+                            <h2 class="card-title">{{ item.productName }}</h2>
+                            <span v-if="item.productStatus === 'discount'" class="org-price">
+                                原價{{ item.price }}</span>
+                            <span v-if="item.productStatus === 'discount'" class="discount-price">
+                                驚爆大增量{{ item.discount }}</span>
+                            <button class="btn btn-secondary bbun" @click="gopay(item)">儲值去</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </main>
-</div>
+        </main>
+    </div>
 </template>
-    
+
 <script setup>
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -83,12 +83,13 @@ onMounted(async () => {
 </script>
 <style scoped>
 .layout {
-  background: url('../../../public/images/homeimg.jpg') center/cover fixed;
-  margin: 0;
-  overflow: hidden;
-  background-color: rgba(0, 0, 0, 0.6);
-  background-blend-mode: multiply;
+    background: url('../../../public/images/forumimg.jpg') center/cover fixed;
+    margin: 0;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.6);
+    background-blend-mode: multiply;
 }
+
 main {
     height: 1000px;
 }

@@ -39,7 +39,7 @@
               <li>{{ formatDate(coupon.beginDate) }} 至 {{ formatDate(coupon.endDate) }} 前使用</li>
               <!-- <br> -->
               <el-button type="primary" plain @click="open">使用說明</el-button>
-              
+
 
               <!-- <RouterLink :to="{name:'Shoppingcart',params:{id:coupon.coupon_id , userid:coupon.userId}}"><el-button type="danger" plain>使用優惠券</el-button></RouterLink> -->
             </ul>
@@ -55,7 +55,7 @@
 
 <script setup>
 import axios from 'axios';
-import { onMounted, ref, h,watch } from 'vue';
+import { onMounted, ref, h, watch } from 'vue';
 import { ElMessageBox } from 'element-plus'
 import { useRoute } from 'vue-router';
 
@@ -63,20 +63,20 @@ const url = import.meta.env.VITE_JAVA_URL;
 const couponlist = ref([]);
 const route = useRoute();
 
-const fetchData  =async () => {
+const fetchData = async () => {
   try {
     const API_URL = `${import.meta.env.VITE_JAVA_URL}/coupon/findById`
     let response = await axios.get(API_URL, { withCredentials: true });
     Object.assign(couponlist.value, response.data)
-    console.log("couponlist",couponlist.value)
+    console.log("couponlist", couponlist.value)
     couponlist.value = response.data;
   } catch (error) {
     console.error(error);
   }
 };
 
-onMounted( () => {
-  fetchData ();
+onMounted(() => {
+  fetchData();
 });
 
 
@@ -111,12 +111,13 @@ function usecoupon(event) {
 
 <style scoped lang="scss">
 .myback {
-  background: url("../../../public/images/homeimg.jpg") center/cover fixed;
+  background: url("../../../public/images/forumimg.jpg") center/cover fixed;
   margin: 0;
   overflow: hidden;
   background-color: rgba(0, 0, 0, 0.2);
   background-blend-mode: multiply;
 }
+
 .table-container {
   display: flex;
   justify-content: center;
@@ -213,4 +214,3 @@ $radius-size: 12px;
   }
 }
 </style>
-

@@ -1,32 +1,32 @@
 <template>
 	<div class="layout">
-	<div id="form-main">
-		<div id="form-div">
-			<form class="form" id="form1" @submit.prevent="handleSubmit">
-				<div style="margin: 10px;">
-					<select v-model="reasonType" style="padding: 5px 5px 5px 45px;" class="form-select"
-						aria-label="Default select example">
-						<option selected>請選擇退款原因</option>
-						<option value="序號不能用">序號不能用</option>
-						<option value="這遊戲跟我想不一樣">這遊戲跟我想的不一樣</option>
-						<option value="商品瑕疵">商品瑕疵</option>
-						<option value="我不想要了">我不想要了</option>
-					</select>
-				</div>
-				<p class="text">
-					<textarea class="feedback-input" v-model="reason" placeholder="詳細描述最多100字"></textarea>
-				</p>
-				<div class="submit">
-					<input type="submit" value="SEND" id="button-blue" />
-					<div class="ease"></div>
-				</div>
-			</form>
+		<div id="form-main">
+			<div id="form-div">
+				<form class="form" id="form1" @submit.prevent="handleSubmit">
+					<div style="margin: 10px;">
+						<select v-model="reasonType" style="padding: 5px 5px 5px 45px;" class="form-select"
+							aria-label="Default select example">
+							<option selected>請選擇退款原因</option>
+							<option value="序號不能用">序號不能用</option>
+							<option value="這遊戲跟我想不一樣">這遊戲跟我想的不一樣</option>
+							<option value="商品瑕疵">商品瑕疵</option>
+							<option value="我不想要了">我不想要了</option>
+						</select>
+					</div>
+					<p class="text">
+						<textarea class="feedback-input" v-model="reason" placeholder="詳細描述最多100字"></textarea>
+					</p>
+					<div class="submit">
+						<input type="submit" value="SEND" id="button-blue" />
+						<div class="ease"></div>
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
-</div>
 </template>
-    
-<script setup >
+
+<script setup>
 import router from '@/router';
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -105,16 +105,16 @@ function handleSubmit() {
 	)
 }
 </script>
-    
+
 <style scoped>
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 
 .layout {
-  background: url('../../../public/images/homeimg.jpg') center/cover fixed;
-  margin: 0;
-  overflow: hidden;
-  background-color: rgba(0, 0, 0, 0.6);
-  background-blend-mode: multiply;
+	background: url('../../../public/images/forumimg.jpg') center/cover fixed;
+	margin: 0;
+	overflow: hidden;
+	background-color: rgba(0, 0, 0, 0.6);
+	background-blend-mode: multiply;
 }
 
 #feedback-page {

@@ -1,11 +1,10 @@
 package tw.eeit175groupone.finalproject.dto;
 
-import jakarta.persistence.Column;
+import java.util.Map;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Map;
 
 @Data
 @NoArgsConstructor
@@ -26,10 +25,10 @@ public class DashboardOrderFind {
     private java.util.Date shipmentDate;
     private java.util.Date updateDate;
     private java.util.Date finishDate;
-    
+
     private String refundStatus;
-    
-    private Map<String,String> orderPage;
+
+    private Map<String, String> orderPage;
     private Integer start;
     private Integer rows;
     private String sort;

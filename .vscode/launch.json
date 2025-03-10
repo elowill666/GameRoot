@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-FinalprojectApplication<finalproject>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "tw.eeit175groupone.finalproject.FinalprojectApplication",
+            "projectName": "finalproject",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

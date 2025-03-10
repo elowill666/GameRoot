@@ -23,39 +23,37 @@ public class CouponService {
     private CouponRepository couponRepository;
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private CouponDetailRepository couponDetailRepository;
-    
-  public List<CouponBean> findByUsedAndUserId(String used, Integer userId){
-        if(userId!=null){
-            List<CouponBean> beans = couponRepository.findByUsedAndUserId(used,userId);
+
+    public List<CouponBean> findByUsedAndUserId(String used, Integer userId) {
+        if (userId != null) {
+            List<CouponBean> beans = couponRepository.findByUsedAndUserId(used, userId);
             if (beans != null && !beans.isEmpty()) {
                 List<CouponBean> result = new ArrayList<>();
                 List<CouponBean> update = new ArrayList<>();
-    
+
                 for (CouponBean temp : beans) {
-                    //只選可以使用的時間區間
-                    if (temp.getEndDate().getTime()>System.currentTimeMillis() && temp.getBeginDate().getTime()<System.currentTimeMillis()) {
+                    // 只選可以使用的時間區間
+                    if (temp.getEndDate().getTime() > System.currentTimeMillis()
+                            && temp.getBeginDate().getTime() < System.currentTimeMillis()) {
                         result.add(temp);
                     } else {
                         // temp.setUsed("used");
                         update.add(temp);
                     }
                 }
-    
+
                 // 如果有使用卷的日期小於現在日期才會有update的List
                 if (!update.isEmpty()) {
                     couponRepository.saveAll(update);
                 }
-    
+
                 return result;
             }
         }
         return null;
     }
 
-     
-/**
+    /**
      * 新增coupon
      * 
      * @param body
@@ -71,27 +69,25 @@ public class CouponService {
         String beginDateStr = obj.isNull("beginDate") ? null : obj.getString("beginDate");
         String endDateStr = obj.isNull("endDate") ? null : obj.getString("endDate");
 
-       
-
-        //把string轉float
+        // 把string轉float
         float discount = 0.0f; // 默认值为 0.0
-            if (discountStr != null) {
-                try {
-                    discount = Float.parseFloat(discountStr);
-                } catch (NumberFormatException e) {
-                    // 处理无法解析为浮点数的情况
-                    e.printStackTrace();
-                }
-            }   
+        if (discountStr != null) {
+            try {
+                discount = Float.parseFloat(discountStr);
+            } catch (NumberFormatException e) {
+                // 处理无法解析为浮点数的情况
+                e.printStackTrace();
+            }
+        }
 
-        List<CouponBean> newCoupons=new ArrayList<>();
+        List<CouponBean> newCoupons = new ArrayList<>();
         for (Integer id : userId) {
             CouponBean temp = new CouponBean();
             temp.setDiscount(discount);
             temp.setInfo(info);
             temp.setUserId(id);
             temp.setUsed(used);
-            
+
             // 检查日期时间字符串是否为 null
             if (beginDateStr != null && endDateStr != null) {
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -104,50 +100,46 @@ public class CouponService {
                     e.printStackTrace();
                     System.out.println("日期时间格式不正确！");
                 }
-            }else{
+            } else {
                 return false;
             }
-            
+
             newCoupons.add(temp);
         }
-        List<CouponBean> couponBeans=couponRepository.saveAll(newCoupons);
-        if(couponBeans!=null && !couponBeans.isEmpty()){
+        List<CouponBean> couponBeans = couponRepository.saveAll(newCoupons);
+        if (couponBeans != null && !couponBeans.isEmpty()) {
             return true;
         }
         return false;
     }
 
-    public List<CouponBean> findAll(){
-		return couponRepository.findAll();
+    public List<CouponBean> findAll() {
+        return couponRepository.findAll();
     }
-    
+
     @Transactional
     public boolean deleteCouponByCouponId(Integer couponId) {
         // System.err.println("66666");
-        
-        if(couponId!= null){
+
+        if (couponId != null) {
             couponRepository.deleteCouponByCouponId(couponId);
             return true;
-        }     
+        }
         return false;
     }
 
-//  /**
-//      * 將折價卷新增到資料庫
-//      * @param infoOfCreate---CouponDetail
-//      * @return CouponDetail--寫入資料庫的數據
-//      *                   
-//      */
-//     public CouponDetail createCoupon(CouponDetail infoOfCreate){
-//         CouponDetail save=couponDetailRepository.save(infoOfCreate);
-//         if(save!=null){
-//             return save;
-//         }
-//         return null;
-//     }
-
+    // /**
+    // * 將折價卷新增到資料庫
+    // * @param infoOfCreate---CouponDetail
+    // * @return CouponDetail--寫入資料庫的數據
+    // *
+    // */
+    // public CouponDetail createCoupon(CouponDetail infoOfCreate){
+    // CouponDetail save=couponDetailRepository.save(infoOfCreate);
+    // if(save!=null){
+    // return save;
+    // }
+    // return null;
+    // }
 
 }
-
-
-

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import tw.eeit175groupone.finalproject.dao.CommentsRepository;
-import tw.eeit175groupone.finalproject.domain.ArticlesBean;
 import tw.eeit175groupone.finalproject.domain.CommentsBean;
 
 @Service

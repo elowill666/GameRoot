@@ -99,7 +99,7 @@ const padZero = (num) => {
 </script>
 <style scoped>
 .myback {
-  background: url("../../../public/images/homeimg.jpg") center/cover fixed;
+  background: url("../../../public/images/forumimg.jpg") center/cover fixed;
   margin: 0;
   overflow: hidden;
   background-color: rgba(0, 0, 0, 0.2);

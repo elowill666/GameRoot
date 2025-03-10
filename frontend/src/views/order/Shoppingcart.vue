@@ -15,7 +15,7 @@
           <tbody>
             <tr v-for="{
               productName, quantity, totalprice, coverImage, cartmiddleId, discountPrice, productStatus, inventoryQuantity
-            }, index in   shoppingcart  " :key="cartmiddleId" :class="{ 'not-sale': productStatus === 'notsale' }">
+            }, index in shoppingcart" :key="cartmiddleId" :class="{ 'not-sale': productStatus === 'notsale' }">
               <td><img :src="coverImage" :alt="productName"></td>
               <td>{{ productName }}</td>
               <td v-if="productStatus === 'notsale'"><img src="/images/soldout.png" style="width: 50%;" alt="123"></td>
@@ -278,7 +278,7 @@ async function chooseCoupon() {
   console.log(couponlist.value);
   for (let i = 0; i < couponlist.value.length; i++) {
     const discount = formatdiscount(couponlist.value[i].discount)
-    couponlistId.value[i] = couponlist.value[i].info +"："+ discount + "折券";
+    couponlistId.value[i] = couponlist.value[i].info + "：" + discount + "折券";
 
   }
   console.log(couponlistId.value);
@@ -304,7 +304,7 @@ async function chooseCoupon() {
 <style scoped lang="css" src="../../assets/shoppingcart.css"></style>
 <style scoped>
 .layout {
-  background: url('../../../public/images/homeimg.jpg') center/cover fixed;
+  background: url('../../../public/images/forumimg.jpg') center/cover fixed;
   margin: 0;
   overflow: hidden;
   background-color: rgba(0, 0, 0, 0.6);
@@ -463,4 +463,3 @@ main {
   text-decoration: line-through;
 }
 </style>
-

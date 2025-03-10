@@ -31,7 +31,8 @@
           </div>
           <div>
             <td v-if="orders.consigneeCity || orders.consigneeArea || orders.consigneeAddress">
-              {{ "收件地址: " + (orders.consigneeCity || '') + (orders.consigneeArea || '') + (orders.consigneeAddress || '')
+              {{ "收件地址: " + (orders.consigneeCity || '') + (orders.consigneeArea || '') + (orders.consigneeAddress ||
+                '')
               }}
             </td>
           </div>
@@ -101,8 +102,8 @@
 
   </div>
 </template>
-  
-<script setup >
+
+<script setup>
 import axios from 'axios';
 import { onMounted, ref, h } from 'vue';
 import router from "@/router";
@@ -212,10 +213,10 @@ function gotoRedfund(orderdetailId) {
 
 }
 </script>
-  
+
 <style scoped>
 .myback {
-  background: url("../../../public/images/homeimg.jpg") center/cover fixed;
+  background: url("../../../public/images/forumimg.jpg") center/cover fixed;
   margin: 0;
   overflow: hidden;
   background-color: rgba(0, 0, 0, 0.2);
