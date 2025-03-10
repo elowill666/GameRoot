@@ -1,5 +1,5 @@
 # 使用 Node.js 作為基礎映像來構建應用
-FROM node:16 AS build-stage
+FROM node:18 AS build-stage
 
 WORKDIR /app
 
