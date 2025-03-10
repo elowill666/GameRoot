@@ -24,6 +24,7 @@ pipeline {
             steps {
                 script {
                     sh 'export PATH=$PATH:/usr/local/bin && docker compose -f ${COMPOSE_FILE} up -d --build'
+                    sh 'pwd'
                 }
             }
         }
