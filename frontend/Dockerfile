@@ -18,7 +18,7 @@ FROM nginx:alpine AS production-stage
 COPY --from=build-stage /app/dist /usr/share/nginx/html
 
 # nginx 配置文件
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY frontend/nginx.conf /etc/nginx/conf.d/default.conf
 
 # 啟動 Nginx
 CMD ["nginx", "-g", "daemon off;"]
