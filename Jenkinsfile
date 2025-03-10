@@ -24,15 +24,6 @@ pipeline {
             steps {
                 script {
                     sh 'export PATH=$PATH:/usr/local/bin && docker compose -f ${COMPOSE_FILE} up -d --build'
-                    sh 'pwd'
-                }
-            }
-        }
-
-        stage('Tear Down Docker Containers') {
-            steps {
-                script {
-                    sh 'export PATH=$PATH:/usr/local/bin && docker compose -f ${COMPOSE_FILE} down'
                 }
             }
         }
