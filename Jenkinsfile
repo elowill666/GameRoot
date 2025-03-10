@@ -39,8 +39,9 @@ pipeline {
     }
 
     post {
-        always {
+        failure {
             sh 'export PATH=$PATH:/usr/local/bin && docker compose -f ${COMPOSE_FILE} down'
         }
     }
+
 }
